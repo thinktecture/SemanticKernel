@@ -115,3 +115,7 @@ public async Task<string> ExecuteUserRequest(string userInput)
     return context.Result;
 }
 ```
+
+This will look like this:
+
+![Example of an LLM navigating your Blazor application](./demo.gif)
