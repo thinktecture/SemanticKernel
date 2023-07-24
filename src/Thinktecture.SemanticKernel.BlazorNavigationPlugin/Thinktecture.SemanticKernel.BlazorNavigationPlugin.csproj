@@ -1,0 +1,73 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    
+    <!-- nuget -->
+    <PropertyGroup>
+        <!-- NuGet Package information -->
+        <VersionPrefix>0.1.0</VersionPrefix>
+        <VersionSuffix>preview-1</VersionSuffix>
+        <Version Condition="'$(BuildNumber)' != ''">$(VersionPrefix)-$(VersionSuffix)-$(BuildNumber)</Version>
+
+        <Company>Thinktecture AG</Company>
+        <Product>Thinktecture.SemanticKernel</Product>
+        <Copyright>Copyright © $(Company) 2023. All rights reserved.</Copyright>
+        <Authors>Sebastian Gingter</Authors>
+        <PackageTags>thinktecture;semantickernel</PackageTags>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageProjectUrl>https://github.com/thinktecture/SemanticKernel</PackageProjectUrl>
+        <PackageReleaseNotes>https://github.com/thinktecture/SemanticKernel/releases</PackageReleaseNotes>
+
+        <!-- Repository -->
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/thinktecture/SemanticKernel</RepositoryUrl>
+
+        <!-- Package readme -->
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+
+        <!-- License -->
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="$(MSBuildThisFileDirectory)../../LICENSE" Visible="false">
+            <Pack>true</Pack>
+            <PackagePath>/</PackagePath>
+        </None>
+        <None Include="$(MSBuildThisFileDirectory)../nuget/icon.png" Visible="false">
+            <Pack>true</Pack>
+            <PackagePath>/</PackagePath>
+        </None>
+        <None Include="$(MSBuildThisFileDirectory)docs\README.md">
+            <Pack>true</Pack>
+            <PackagePath>/</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <!--
+      <FrameworkReference Include="Microsoft.NET.Sdk.BlazorWebAssembly" />
+      -->
+      <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.9" />
+      <PackageReference Include="Microsoft.SemanticKernel.Abstractions" Version="0.17.230718.1-preview" />
+    </ItemGroup>
+
+    <!-- Enable sourcelink support for debugging our sources -->
+    <PropertyGroup Condition="'$(DisableSourceLink)' != 'true'">
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <IncludeSymbols>true</IncludeSymbols>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    </PropertyGroup>
+
+    <ItemGroup Condition="'$(DisableSourceLink)' != 'true'">
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+        <SourceRoot Include="$(MSBuildThisFileDirectory)" />
+    </ItemGroup>
+</Project>
